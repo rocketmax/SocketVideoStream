@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    SocketVideo sv = new SocketVideo(MainActivity.this, "192.168.1.113", 65432);
+    SocketVideo sv = new SocketVideo(MainActivity.this, "192.168.1.114", 65432);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

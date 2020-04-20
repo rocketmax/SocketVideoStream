@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.telecom.Call;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -17,12 +16,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.ConnectException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.concurrent.Callable;
 
 public class SocketVideo {
 
@@ -109,6 +105,7 @@ public class SocketVideo {
     public class ReceiveTask implements Runnable{
         private Exception exception;
         boolean err = false;
+        Bitmap bm;
 
         @Override
         public void run(){
@@ -142,11 +139,11 @@ public class SocketVideo {
                     }
                     Log.i("BYTES RECEIVED", Integer.toString(bytesRead));
 
-                    final Bitmap bm = BitmapFactory.decodeByteArray(bimg, 0, bimg.length);
 
                     ((Activity)context).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            bm = BitmapFactory.decodeByteArray(bimg, 0, bimg.length);
                             ImageView iv = (ImageView) ((Activity)context).findViewById(R.id.iv);
                             iv.setImageBitmap(Bitmap.createScaledBitmap(bm, 960, 540, false));
                         }
